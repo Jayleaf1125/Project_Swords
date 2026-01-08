@@ -10,11 +10,10 @@ public class InputManager : Singleton<InputManager>, IPlayerActions
     #region Events
     public event Action<Vector2> Move = delegate { };
     public event Action Jump = delegate { };
+    public event Action<bool> Run = delegate { };
     #endregion
 
     public Vector2 MoveDirection => inputActions.Player.Move.ReadValue<Vector2>();
-    //public Vector2 AimDirection => inputActions.Player.Aim.ReadValue<Vector2>();
-
 
     private protected override void Awake()
     {
@@ -48,5 +47,16 @@ public class InputManager : Singleton<InputManager>, IPlayerActions
         if (context.performed) Jump.Invoke();
     }
 
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Run.Invoke(true);
+        }
 
+        if (context.canceled)
+        {
+            Run.Invoke(false);
+        }
+    }
 }

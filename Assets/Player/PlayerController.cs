@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D Rb { get; private set; }
     public SpriteRenderer Sr { get; private set; }
     public bool IsGrounded { get; set; }
+    public bool IsRunning { get; set; } = false;
 
     [Header("State Machine")]
     public StateMachine<PlayerController> StateMachine { get; private set; }
@@ -71,17 +72,17 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         #if UNITY_EDITOR
-                if (Application.isPlaying)
-                {
-                    Gizmos.color = IsGrounded ? Color.green : Color.red;
+            if (Application.isPlaying)
+            {
+                Gizmos.color = IsGrounded ? Color.green : Color.red;
 
-                    GUIStyle style = new GUIStyle();
-                    style.alignment = TextAnchor.MiddleCenter;
-                    style.normal.textColor = Color.red;
-                    style.fontSize = 40;
-                    Handles.Label(transform.position + Vector3.up,
-                        StateMachine.CurrentState.GetType().Name + ">" + CurrentState, style);
-                }
+                GUIStyle style = new GUIStyle();
+                style.alignment = TextAnchor.MiddleCenter;
+                style.normal.textColor = Color.red;
+                style.fontSize = 40;
+                Handles.Label(transform.position + Vector3.up,
+                    StateMachine.CurrentState.GetType().Name + ">" + CurrentState, style);
+            }
         #endif
     }
 
