@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _groundLayer;
 
     public Rigidbody2D Rb { get; private set; }
+    public SpriteRenderer Sr { get; private set; }
     public bool IsGrounded { get; set; }
 
     [Header("State Machine")]
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
+        Sr = GetComponent<SpriteRenderer>();
+
         SetupStateMachine();
     }
 

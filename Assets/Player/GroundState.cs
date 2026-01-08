@@ -18,9 +18,7 @@ public class GroundState : State<PlayerController>
 
     private protected override void OnFixedUpdate()
     {
-        Vector2 vm = InputManager.Instance.MoveDirection;
-        vm.y = 0f;
-        _context.Rb.linearVelocityX = vm.x * Speed;
+        Movement();
     }
 
     private protected override void OnUpdate()
@@ -38,6 +36,12 @@ public class GroundState : State<PlayerController>
         return null;
     }
 
+    void Movement()
+    {
+        Vector2 vm = InputManager.Instance.MoveDirection;
+        vm.y = 0f;
+        _context.Rb.linearVelocityX = vm.x * Speed;
+    }
 
     void Jumping()
     {
